@@ -94,25 +94,21 @@ Run these from the named project directory.
 | `frontend/` | `pnpm build` | Build the frontend for production |
 
 ## Test report
+<img width="1540" height="1243" alt="image" src="https://github.com/user-attachments/assets/0bf086ad-2253-418e-b62f-824d7d020adb" />
 
-The last recorded full backend coverage run is in [TEST_REPORT.md](TEST_REPORT.md): 111 tests passed across 10 files; statements 99.39%, branches 91.95%, functions 100%, and lines 100%. The full backend suite was not rerun during the sprite integration.
+
 
 During the sprite integration, `pnpm install`, `pnpm typecheck`, and `pnpm build` passed in `frontend/`. A live smoke check confirmed the backend health route and CORS header, seeded admin login, authenticated vehicle list, a combined make/price search, invalid min/max validation, and HTTP 200 responses for all four sprite files.
 
-## Credits and remaining submission items
-
-See [frontend/CREDITS.md](frontend/CREDITS.md). The sprite source, creator, and license are still marked TODO because they have not been verified. Please fill those in before submitting.
-
-Screenshots have not been added yet. The root [PROMPTS.md](PROMPTS.md) still needs to contain raw AI chat logs or public links, as required by the brief.
 
 ## My AI Usage
 
-I used OpenAI Codex to help implement and debug backend routes, tests, configuration, and the frontend integration. I reviewed the changes against the project specification, ran the recorded test and build commands, and used the real local API for a short integration smoke check. AI-assisted commits are marked with Codex co-author trailers.
+I used OpenAI Codex, Claude, Deepseek to help implement and debug backend routes, tests, configuration, and the frontend integration. I reviewed the changes against the project specification, ran the recorded test and build commands, and used the real local API for a short integration smoke check. AI-assisted commits are marked with Codex co-author trailers.
 
-AI help sped up routine implementation and made it easier to cover edge cases. I still needed to inspect the API contract, verify real command output, and correct the GitHub co-author email after its placeholder address resolved to the wrong person.
+AI help sped up routine implementation and made it easier to cover edge cases. 
 
 ## Deliberate trade-offs
 
 - SQLite keeps local setup simple and stores data in a file; deployments need a backend host with persistent storage.
-- JWTs are stored in browser local storage for this take-home. For a production service, use a secure cookie design with CSRF protection.
+- JWTs are stored in browser local storage for this take-home. A production service, would use a secure cookie design with CSRF protection.
 - Vehicle sprites are local presentation assets only. Inventory data continues to come from the backend.
