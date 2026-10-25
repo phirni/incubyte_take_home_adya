@@ -1,10 +1,10 @@
 # Car Dealership Inventory
 
-A small full-stack dealership app for browsing, searching, and purchasing cars. Admins can manage the stock. This repository contains the React frontend and the Express/Prisma backend.
+A small gaming inventory themed full-stack dealership app for browsing, searching, and purchasing cars. Admins can manage the stock. This repository contains the React frontend and the Express/Prisma backend.
 
 ## A note about AI commit attribution
 
-The take-home brief asks us to mark AI-assisted commits with a `Co-authored-by` trailer. Its example uses the generic address `AI@users.noreply.github.com`; GitHub connected that address to an unrelated person, Andrey Sitnik. We corrected the two affected commits to use `Codex <noreply@openai.com>`, keeping the AI attribution while avoiding the wrong profile. Only those two commit messages were rewritten.
+The take-home brief asked to mark AI-assisted commits with a `Co-authored-by` trailer. Its example uses the generic address `AI@users.noreply.github.com`; GitHub connected that address to an unrelated person, Andrey Sitnik. I corrected the two affected commits to use `Codex <noreply@openai.com>`, keeping the AI attribution while avoiding the wrong profile. Only those two commit messages were rewritten.
 
 ## What is in the app
 
