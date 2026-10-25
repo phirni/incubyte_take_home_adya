@@ -1,6 +1,6 @@
 # Car Dealership Inventory
 
-A small gaming inventory themed full-stack dealership app for browsing, searching, and purchasing cars. Admins can manage the stock. This repository contains the React frontend and the Express/Prisma backend.
+A small gaming inventory themed full-stack dealership app for browsing, searching, and purchasing cars. Admins can manage the stock. This repository contains the React frontend and the Express/Prisma backend. Its deployed but to see its full functionalities you will to install and run locally.
 <img width="2861" height="1455" alt="Screenshot 2026-10-25 213324" src="https://github.com/user-attachments/assets/c0233feb-cae4-47db-8a5f-bf512a430899" />
 
 ## A note about AI commit attribution
