@@ -2,9 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { prisma } from './lib/prisma';
 const JWT_SECRET = process.env.JWT_SECRET ?? 'dev-secret-change-me';
 const BCRYPT_ROUNDS = Number(process.env.BCRYPT_ROUNDS ?? 10);
 
