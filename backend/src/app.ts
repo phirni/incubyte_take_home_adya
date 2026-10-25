@@ -4,6 +4,7 @@ import { config } from './config';
 import { authRoutes } from './routes/auth';
 import { vehicleQueries } from './routes/vehicleQueries';
 import { vehicleManagement } from './routes/vehicleManagement';
+import { inventory } from './routes/inventory';
 import { authenticate } from './middleware/auth';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler';
 
@@ -18,7 +19,7 @@ export function createApp() {
   });
 
   app.use('/api/auth', authRoutes);
-  app.use('/api/vehicles', authenticate, vehicleQueries, vehicleManagement);
+  app.use('/api/vehicles', authenticate, vehicleQueries, vehicleManagement, inventory);
 
   app.use(notFoundHandler);
   app.use(errorHandler);
