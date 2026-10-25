@@ -1,4 +1,4 @@
-phi# Car Dealership Inventory System — Specification
+# Car Dealership Inventory System — Specification
 
 ## 1. Intent
 

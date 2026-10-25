@@ -12,7 +12,7 @@ export const inventory = Router();
 // One unit per request. The conditional updateMany is atomic, so two buyers of the
 // last unit can never both succeed and stock can never go negative.
 inventory.post('/:id/purchase', async (req, res) => {
-  const { id } = req.params;
+  const id = String(req.params.id);
   const { count } = await prisma.vehicle.updateMany({
     where: { id, quantity: { gt: 0 } },
     data: { quantity: { decrement: 1 } },
@@ -32,7 +32,7 @@ inventory.post('/:id/restock', requireAdmin, async (req, res) => {
   const { quantity } = restockSchema.parse(req.body ?? {});
   try {
     const vehicle = await prisma.vehicle.update({
-      where: { id: req.params.id },
+      where: { id: String(req.params.id) },
       data: { quantity: { increment: quantity } },
     });
     res.json({ vehicle });

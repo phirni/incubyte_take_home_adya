@@ -6,7 +6,7 @@ export default defineConfig({
     environment: 'node',
     fileParallelism: false,
     pool: 'forks',
-    poolOptions: { forks: { singleFork: true } },
+    maxWorkers: 1,
     setupFiles: ['./tests/setup.ts'],
     env: {
       DATABASE_URL: 'file:./test.db',

@@ -29,7 +29,7 @@ vehicleManagement.post('/', requireAdmin, async (req, res) => {
 vehicleManagement.put('/:id', requireAdmin, async (req, res) => {
   const data = updateSchema.parse(req.body ?? {});
   try {
-    const vehicle = await prisma.vehicle.update({ where: { id: req.params.id }, data });
+    const vehicle = await prisma.vehicle.update({ where: { id: String(req.params.id) }, data });
     res.json({ vehicle });
   } catch (err) {
     if (hasPrismaCode(err, 'P2025')) throw vehicleNotFound();
@@ -39,7 +39,7 @@ vehicleManagement.put('/:id', requireAdmin, async (req, res) => {
 
 vehicleManagement.delete('/:id', requireAdmin, async (req, res) => {
   try {
-    await prisma.vehicle.delete({ where: { id: req.params.id } });
+    await prisma.vehicle.delete({ where: { id: String(req.params.id) } });
     res.status(204).send();
   } catch (err) {
     if (hasPrismaCode(err, 'P2025')) throw vehicleNotFound();

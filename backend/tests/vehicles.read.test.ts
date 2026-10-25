@@ -141,3 +141,21 @@ describe('GET /api/vehicles/search', () => {
     expect(res.body.error.message).toContain(field);
   });
 });
+
+describe('JWT claim validation', () => {
+  it.each(['string payload', 'missing subject', 'invalid role'])('%s returns 401', async (caseName) => {
+    const { user } = await createUser();
+    const secret = process.env.JWT_SECRET as string;
+    const token = caseName === 'string payload'
+      ? jwt.sign('not-an-object', secret)
+      : caseName === 'missing subject'
+        ? jwt.sign({ role: 'USER' }, secret, { expiresIn: '1h' })
+        : jwt.sign({ sub: user.id, role: 'OWNER' }, secret, { expiresIn: '1h' });
+
+    const response = await request(app)
+      .get('/api/vehicles')
+      .set('Authorization', `Bearer ${token}`);
+
+    expectError(response, 401, 'UNAUTHORIZED');
+  });
+});
