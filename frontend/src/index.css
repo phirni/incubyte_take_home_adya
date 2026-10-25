@@ -54,6 +54,7 @@ dialog::backdrop { background: rgb(10 11 13 / 0.7); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  .vrow .sprite { animation: none !important; }
 }
 
 /* Vehicle sprites: pixel art, scaled 2x with no smoothing */
