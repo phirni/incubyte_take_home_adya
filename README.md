@@ -1,6 +1,7 @@
 # Car Dealership Inventory
 
 A small gaming inventory themed full-stack dealership app for browsing, searching, and purchasing cars. Admins can manage the stock. This repository contains the React frontend and the Express/Prisma backend.
+<img width="2861" height="1455" alt="Screenshot 2026-10-25 213324" src="https://github.com/user-attachments/assets/c0233feb-cae4-47db-8a5f-bf512a430899" />
 
 ## A note about AI commit attribution
 
@@ -15,7 +16,15 @@ The take-home brief asked to mark AI-assisted commits with a `Co-authored-by` tr
 - A persistent local SQLite database managed by Prisma.
 - Four supplied sedan sprites. The frontend assigns a sprite by vehicle ID and shows a glow/bob effect on row hover or keyboard focus. These are decorative frontend assets; the API has no image field.
 
-Money is stored and sent by the API as integer cents. The search form accepts dollars and converts them to cents at the frontend boundary.
+Money is stored and sent by the API as integer cents. The search form accepts dollars and converts them to cents at the frontend boundary.<img width="2847" height="1393" alt="Screenshot 2026-10-25 213542" src="https://github.com/user-attachments/assets/6b946b90-8c9d-42d6-a981-324eceac5a66" />
+<img width="2873" height="1000" alt="Screenshot 2026-10-25 213513" src="https://github.com/user-attachments/assets/b433a733-5b4e-49c9-9c27-140beb3dfdb6" />
+<img width="2874" height="1270" alt="Screenshot 2026-10-25 213456" src="https://github.com/user-attachments/assets/e9bceead-e912-4a17-ad62-0ee40422a438" />
+<img width="2868" height="997" alt="Screenshot 2026-10-25 213446" src="https://github.com/user-attachments/assets/cffd6453-0e11-4ac7-bb91-cde62bc95090" />
+<img width="2873" height="980" alt="Screenshot 2026-10-25 213441" src="https://github.com/user-attachments/assets/09511e2e-286f-4b8a-b807-2234a85daa9a" />
+<img width="2832" height="1344" alt="Screenshot 2026-10-25 213432" src="https://github.com/user-attachments/assets/1cef9ae2-9e0f-4385-b889-c504c142750b" />
+<img width="1531" height="1247" alt="Screenshot 2026-10-25 204508" src="https://github.com/user-attachments/assets/df00e7f4-4d1d-4657-bec3-f08ba3997dd9" />
+<img width="1510" height="1399" alt="Screenshot 2026-10-25 204423" src="https://github.com/user-attachments/assets/a21c24df-18d7-4a5a-8019-486e2f6fd5b9" />
+
 
 ## Run it locally
 
