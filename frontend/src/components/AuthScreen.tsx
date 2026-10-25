@@ -2,7 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { api, ApiError } from '../api';
 import type { Session } from '../types';
 
-export default function AuthScreen({ onAuth, notice }: { onAuth: (s: Session) => void; notice: string }) {
+export default function AuthScreen({ onAuth, onGuest, notice }: { onAuth: (s: Session) => void; onGuest: () => void; notice: string }) {
   const [mode, setMode] = useState<'login' | 'register'>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -61,6 +61,9 @@ export default function AuthScreen({ onAuth, notice }: { onAuth: (s: Session) =>
           onClick={() => { setMode(isRegister ? 'login' : 'register'); setError(''); }}>
           {isRegister ? 'Have an account? Sign in' : 'New here? Create an account'}
         </button>
+        <div className="my-5 border-t border-rail" />
+        <button type="button" className="btn w-full" onClick={onGuest}>Continue as guest</button>
+        <p className="mt-2 text-xs text-dim">Preview sample inventory. Sign in to purchase or manage vehicles.</p>
       </form>
     </main>
   );

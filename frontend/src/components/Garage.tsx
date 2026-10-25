@@ -6,12 +6,13 @@ import type { Filters, Vehicle, VehicleInput } from '../types';
 import VehicleRow from './VehicleRow';
 import VehicleForm from './VehicleForm';
 import RestockForm from './RestockForm';
+import { demoVehicles } from '../demoVehicles';
 
 const EMPTY: Filters = { make: '', model: '', category: '', minPrice: '', maxPrice: '' };
 
 type Dialog = { kind: 'form'; vehicle: Vehicle | null } | { kind: 'restock'; vehicle: Vehicle } | null;
 
-export default function Garage({ token, isAdmin, onExpired }: { token: string; isAdmin: boolean; onExpired: () => void }) {
+export default function Garage({ token, isAdmin, guest, onExpired }: { token: string; isAdmin: boolean; guest: boolean; onExpired: () => void }) {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const [filters, setFilters] = useState<Filters>(EMPTY);
   const [applied, setApplied] = useState<Filters>(EMPTY);
@@ -34,13 +35,25 @@ export default function Garage({ token, isAdmin, onExpired }: { token: string; i
     setLoading(true);
     setLoadError('');
     try {
-      setVehicles(await api.listVehicles(f, token));
+      if (guest) {
+        const min = f.minPrice.trim() ? Math.round(Number(f.minPrice) * 100) : undefined;
+        const max = f.maxPrice.trim() ? Math.round(Number(f.maxPrice) * 100) : undefined;
+        setVehicles(demoVehicles.filter((v) =>
+          (!f.make.trim() || v.make.toLowerCase().includes(f.make.trim().toLowerCase())) &&
+          (!f.model.trim() || v.model.toLowerCase().includes(f.model.trim().toLowerCase())) &&
+          (!f.category.trim() || v.category.toLowerCase().includes(f.category.trim().toLowerCase())) &&
+          (min === undefined || v.priceCents >= min) &&
+          (max === undefined || v.priceCents <= max),
+        ));
+      } else {
+        setVehicles(await api.listVehicles(f, token));
+      }
     } catch (err) {
       setLoadError(guard(err));
     } finally {
       setLoading(false);
     }
-  }, [token, guard]);
+  }, [guest, token, guard]);
 
   useEffect(() => { void load(applied); }, [applied, load]);
 
@@ -129,6 +142,7 @@ export default function Garage({ token, isAdmin, onExpired }: { token: string; i
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-6">
+      {guest && <p className="mb-4 border-l-4 border-amber bg-panel px-4 py-3 text-sm text-dim">You’re viewing sample inventory. Purchases and inventory changes require an account and a connected backend.</p>}
       <form onSubmit={search} className="grid gap-3 border border-rail bg-panel p-4 sm:grid-cols-2 lg:grid-cols-5" role="search" noValidate>
         {([['make', 'Make'], ['model', 'Model'], ['category', 'Category']] as const).map(([k, label]) => (
           <div key={k}>
@@ -187,7 +201,7 @@ export default function Garage({ token, isAdmin, onExpired }: { token: string; i
             <p className="text-sm text-dim">{vehicles.length} {vehicles.length === 1 ? 'vehicle' : 'vehicles'}</p>
             <ul className="mt-2 border-t border-rail">
               {vehicles.map((v) => (
-                <VehicleRow key={v.id} vehicle={v} isAdmin={isAdmin} busy={busyId === v.id}
+                <VehicleRow key={v.id} vehicle={v} isAdmin={isAdmin} guest={guest} busy={busyId === v.id}
                   onPurchase={() => void purchase(v)}
                   onEdit={() => { setDialogError(''); setDialog({ kind: 'form', vehicle: v }); }}
                   onRestock={() => { setDialogError(''); setDialog({ kind: 'restock', vehicle: v }); }}

@@ -10,6 +10,7 @@ const colorFor = (id: string) => COLORS[[...id].reduce((a, c) => a + c.charCodeA
 interface Props {
   vehicle: Vehicle;
   isAdmin: boolean;
+  guest: boolean;
   busy: boolean;
   onPurchase: () => void;
   onEdit: () => void;
@@ -17,7 +18,7 @@ interface Props {
   onDelete: () => void;
 }
 
-export default function VehicleRow({ vehicle: v, isAdmin, busy, onPurchase, onEdit, onRestock, onDelete }: Props) {
+export default function VehicleRow({ vehicle: v, isAdmin, guest, busy, onPurchase, onEdit, onRestock, onDelete }: Props) {
   const [confirming, setConfirming] = useState(false);
   const out = v.quantity === 0;
   const stock = out ? 'Out of stock' : v.quantity <= 3 ? `Only ${v.quantity} left` : `${v.quantity} in stock`;
@@ -43,11 +44,13 @@ export default function VehicleRow({ vehicle: v, isAdmin, busy, onPurchase, onEd
       </div>
 
       <div className="flex flex-wrap items-center gap-2 pr-4 md:justify-end">
-        <button className="btn btn-primary" disabled={out || busy} onClick={onPurchase}
-          aria-describedby={out ? `oos-${v.id}` : undefined}>
-          <ShoppingCart size={16} aria-hidden /> Buy one
-        </button>
-        {out && <span id={`oos-${v.id}`} className="text-sm text-dim">Unavailable until restocked</span>}
+        {guest ? <span className="text-sm text-dim">Sign in to purchase</span> : <>
+          <button className="btn btn-primary" disabled={out || busy} onClick={onPurchase}
+            aria-describedby={out ? `oos-${v.id}` : undefined}>
+            <ShoppingCart size={16} aria-hidden /> Buy one
+          </button>
+          {out && <span id={`oos-${v.id}`} className="text-sm text-dim">Unavailable until restocked</span>}
+        </>}
 
         {isAdmin && (
           <>
