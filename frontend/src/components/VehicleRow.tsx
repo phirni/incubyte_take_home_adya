@@ -3,6 +3,10 @@ import { Pencil, PackagePlus, Trash2, ShoppingCart } from 'lucide-react';
 import { money } from '../format';
 import type { Vehicle } from '../types';
 
+const COLORS = ['white', 'brown', 'red', 'blue'] as const;
+// Same vehicle always gets the same colour; several cars may share a sprite.
+const colorFor = (id: string) => COLORS[[...id].reduce((a, c) => a + c.charCodeAt(0), 0) % COLORS.length];
+
 interface Props {
   vehicle: Vehicle;
   isAdmin: boolean;
@@ -19,8 +23,13 @@ export default function VehicleRow({ vehicle: v, isAdmin, busy, onPurchase, onEd
   const stock = out ? 'Out of stock' : v.quantity <= 3 ? `Only ${v.quantity} left` : `${v.quantity} in stock`;
 
   return (
-    <li className={`grid gap-3 border-b border-rail py-4 pl-4 md:grid-cols-[1fr_auto_auto] md:items-center md:gap-8 ${
+    <li data-out={out || undefined}
+      className={`vrow grid gap-3 border-b border-rail py-4 pl-4 md:grid-cols-[auto_1fr_auto_auto] md:items-center md:gap-8 ${
       out ? 'border-l-4 border-l-rail' : 'border-l-4 border-l-amber'}`}>
+      <div className="sprite-wrap">
+        <img src={`/cars/sedan-${colorFor(v.id)}.png`} alt="" width={246} height={82} className="sprite" draggable={false} />
+        <span className="sprite-shadow" aria-hidden />
+      </div>
       <div className="min-w-0">
         <p className="text-sm text-dim">{v.category}</p>
         <h3 className="font-display text-3xl font-semibold leading-tight">

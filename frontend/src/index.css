@@ -55,3 +55,23 @@ dialog::backdrop { background: rgb(10 11 13 / 0.7); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
+
+/* Vehicle sprites: pixel art, scaled 2x with no smoothing */
+.sprite-wrap { position: relative; width: 246px; max-width: 100%; padding-top: 6px; }
+.sprite {
+  display: block; width: 100%; height: auto;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 0 rgb(240 164 58 / 0));
+  transition: filter 160ms ease-out;
+}
+.sprite-shadow {
+  position: absolute; left: 8%; right: 8%; bottom: -3px; height: 8px;
+  border-radius: 50%; background: rgb(0 0 0 / 0.35); filter: blur(2px);
+}
+.vrow:not([data-out]):hover .sprite,
+.vrow:not([data-out]):focus-within .sprite {
+  filter: drop-shadow(0 0 5px rgb(240 164 58 / 0.85)) drop-shadow(0 0 16px rgb(240 164 58 / 0.4));
+  animation: bob 720ms ease-in-out infinite;
+}
+.vrow[data-out] .sprite { opacity: 0.45; filter: grayscale(1); }
+@keyframes bob { 50% { transform: translateY(-3px); } }
