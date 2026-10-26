@@ -5,7 +5,7 @@ A small gaming inventory themed full-stack dealership app for browsing, searchin
 
 ## A note about AI commit attribution
 
-The take-home brief asked to mark AI-assisted commits with a `Co-authored-by` trailer. Its example uses the generic address `AI@users.noreply.github.com`; GitHub connected that address to an unrelated person, Andrey Sitnik. I corrected the two affected commits to use `Codex <noreply@openai.com>`, keeping the AI attribution while avoiding the wrong profile. Only those two commit messages were rewritten.
+The take-home brief asked to mark AI-assisted commits with a `Co-authored-by` trailer. Its example uses the generic address `AI@users.noreply.github.com`; GitHub connected that address to an unrelated person, Andrey Sitnik. I corrected the two affected commits to use `Codex <noreply@openai.com>`, but we rewrote the format for the commit . 
 
 ## What is in the app
 
